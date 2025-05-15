@@ -46,10 +46,11 @@ openssl s_client -connect <route>:443 -showcerts
 openssl req -new -key tls.key -out tls.csr
 openssl x509 -req -in tls.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out tls.crt -days 90 -sha256
 ```
-*	Replace the certificate
+* Delete the old secret, create a new secret and delete the pod
 ```
-oc create secret tls todo-secret2 --cert=tls.crt --key=tls.key
-oc set volume deployment todo-angular --add --type secret --mount-path /usr/local/etc/ssl/certs --secret-name todo-secret2 --read-only
+oc delete secret todo-secret
+oc create secret tls todo-secret --cert=tls.crt --key=tls.key
+oc delete pod -l app=todo-angular
 ```
 *	Verify that you can access the application and that the certificate is valid for another 90 days
 ```
