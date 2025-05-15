@@ -1,5 +1,25 @@
-# certificate_renewal
-*	Create a self signed certificate with a validity of 1 day. You can use the documentation for openssl man openssl-req and man openssl-x509.
+# Certificate renewal
+
+## What Is an SSL Certificate, and Why Should You Renew It?
+An SSL certificate acts like a digital passport for your website. It verifies the identity of your website and creates a secure connection between your web server and a user’s browser.
+This encrypted connection makes sure that any data exchanged between the website and the user, such as login credentials or credit card information, stays confidential and secure.
+Most SSL certificates expire after 1 or 2 years, depending on the type of certificate you are using and your certificate authority (CA). Some certificates lapse before that, like Let’s Encrypt, which expires after 90 days.
+If you don’t renew your certificates, then users will see a security warning on their web browsers when they visit your site.
+
+![image](https://github.com/user-attachments/assets/562127f1-f263-410a-832d-ac14e7c33680)
+
+## In this exercise we will simulate an application with an expiring certificate.
+*	Create a self signed certificate with a validity of 1 day. You can use the documentation for openssl
+```
+man openssl-req
+```
+
+and
+  
+```
+man openssl-x509
+```
+ 	
 1. Create a key for the certificate authority
 ```
  openssl genrsa -des3 -out myCA.key 2048
