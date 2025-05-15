@@ -24,7 +24,7 @@ openssl x509 -req -in tls.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out 
 ```
 oc new-project eric
 oc new-app quay.io/redhattraining/todo-angular:v1.2
-oc create route passthrough todo-angular --service=todo-angular
+oc create route passthrough todo-angular --service=todo-angular --port 8443
 ```
 * The application does not run, it needs a secret with the certificate. Take a look at the logs of the pod so that you know where to mount the secret.
 ```
@@ -50,7 +50,7 @@ openssl x509 -req -in tls.csr -CA myCA.pem -CAkey myCA.key -CAcreateserial -out 
 ```
 oc delete secret todo-secret
 oc create secret tls todo-secret --cert=tls.crt --key=tls.key
-oc delete pod -l app=todo-angular
+oc delete pod -l deployment=todo-angular
 ```
 *	Verify that you can access the application and that the certificate is valid for another 90 days
 ```
