@@ -77,3 +77,4 @@ oc delete pod -l deployment=todo-angular
 curl -k <route>
 openssl s_client -connect <route>:443 -showcerts
 ```
+![Screenshot 2025-05-15 at 16 50 39](https://github.com/user-attachments/assets/a004a659-fe3d-4bad-bdd1-8911db5ccc33)
