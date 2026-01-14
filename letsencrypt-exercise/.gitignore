@@ -1,0 +1,28 @@
+# Certificate files - DO NOT commit to version control
+tls.crt
+tls.key
+*.crt
+*.key
+*.pem
+*.csr
+*.p12
+*.pfx
+
+# Let's Encrypt directories
+letsencrypt/
+certbot/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.iml

@@ -1,0 +1,73 @@
+# Certificate resource for automatic Let's Encrypt certificate management
+# This resource tells cert-manager to obtain and manage a certificate
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: todo-angular-cert
+  namespace: letsencrypt-demo
+spec:
+  # Name of the secret where the certificate will be stored
+  secretName: todo-letsencrypt-secret
+  
+  # Duration before certificate expiration to trigger renewal (default: 30 days)
+  renewBefore: 720h  # 30 days (720 hours)
+  
+  # Certificate validity duration (Let's Encrypt issues 90-day certificates)
+  duration: 2160h  # 90 days (2160 hours)
+  
+  # Reference to the ClusterIssuer
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
+  
+  # Common name for the certificate
+  commonName: yourdomain.com
+  
+  # DNS names (Subject Alternative Names)
+  dnsNames:
+  - yourdomain.com
+  - www.yourdomain.com
+  
+  # Private key configuration
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  
+  # Usages for the certificate
+  usages:
+  - digital signature
+  - key encipherment
+  - server auth
+  - client auth
+
+---
+# Example Certificate for staging environment (testing)
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: todo-angular-cert-staging
+  namespace: letsencrypt-demo
+spec:
+  secretName: todo-letsencrypt-secret-staging
+  renewBefore: 720h  # 30 days (720 hours)
+  duration: 2160h  # 90 days (2160 hours)
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+    group: cert-manager.io
+  commonName: yourdomain.com
+  dnsNames:
+  - yourdomain.com
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  usages:
+  - digital signature
+  - key encipherment
+  - server auth
+
+# Made with Bob
